@@ -24,10 +24,6 @@ const App = () => {
   };
 
   useEffect(() => {
-    console.log(
-      process.env.NEXT_PUBLIC_DB_HOST,
-      "this is the value of the env file"
-    );
     if (locations.length > 0) {
       // Set the map center to the first location
       setMapCenter({ lat: locations[0].latitude, lng: locations[0].longitude });
