@@ -1,0 +1,46 @@
+[
+    {
+        "latitude": -16.918098,
+        "longitude": 145.740529,
+        "vehicleType": "bus",
+        "vehicleId": 183,
+        "vehicleName": "B-618XMO #2",
+        "operationStaffId": 269193
+    },
+    {
+        "latitude": -16.918098,
+        "longitude": 145.740529,
+        "vehicleType": "bus",
+        "vehicleId": 184,
+        "vehicleName": "B-042XOA #8",
+        "operationStaffId": 269193
+    },
+    {
+        "latitude": -16.918098,
+        "longitude": 145.80,
+        "vehicleType": "balloon",
+        "vehicleId": 184,
+        "vehicleName": "B-042XOA #8",
+        "operationStaffId": 269193
+    },
+    {
+        "latitude": -16.918098,
+        "longitude": 145.78,
+        "vehicleType": "bus",
+        "vehicleId": 184,
+        "vehicleName": "B-042XOA #8",
+        "operationStaffId": 269193
+    },
+    {
+        "latitude": -16.917956,
+        "longitude": 145.76,
+        "vehicleType": "bus",
+        "vehicleId": 183,
+        "vehicleName": "B-618XMO #2",
+        "operationStaffId": 269193
+    }
+
+
+    
+    
+]
