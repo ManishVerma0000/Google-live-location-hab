@@ -19,9 +19,8 @@ interface ApiResponse {
   message: string;
   data: Location[];
 }
-
 const App: React.FC = () => {
-  const [mapCenter, setMapCenter] = useState({ lat: 37.7749, lng: -122.4194 });
+  const [mapCenter, setMapCenter] = useState({ lat: -16.917601457089138, lng: 145.77835451688978 });
   const [locations, setLocations] = useState<Location[]>([]); // State for locations
   const mapContainerStyle = {
     width: "100%",
