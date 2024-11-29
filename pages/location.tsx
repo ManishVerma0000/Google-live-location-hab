@@ -72,10 +72,10 @@ const App: React.FC = () => {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-          margin: "10px",
+          margin: "5px",
         }}
       >
-        <h1 style={{ fontSize: "40px" }}>Driver And Pilot Live Location</h1>
+        <h1 style={{ fontSize: "24px" }}>Driver And Pilot Live Location</h1>
       </div>
 
       <LoadScript googleMapsApiKey={API_KEY}>
