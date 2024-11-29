@@ -1,13 +1,15 @@
 "use client";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, Marker } from "@react-google-maps/api";
+import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
 import api from "@/api/api";
+
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string;
+
 interface Location {
   latitude: number;
   longitude: number;
-  vehicleType: string;
+  vehicleType: string; // Determines which icon to show
   vehicleId: number;
   vehicleName: string;
   operationStaffId: number;
@@ -19,9 +21,14 @@ interface ApiResponse {
   message: string;
   data: Location[];
 }
+
 const App: React.FC = () => {
-  const [mapCenter, setMapCenter] = useState({ lat: -16.917601457089138, lng: 145.77835451688978 });
+  const [mapCenter, setMapCenter] = useState({
+    lat: -16.917601457089138,
+    lng: 145.77835451688978,
+  });
   const [locations, setLocations] = useState<Location[]>([]); // State for locations
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null); // For InfoWindow
   const mapContainerStyle = {
     width: "100%",
     height: "500px",
@@ -65,6 +72,11 @@ const App: React.FC = () => {
     }
   };
 
+  const getMarkerIcon = (vehicleType: string) => {
+    // Choose marker icon based on vehicleType
+    return vehicleType === "bus" ? "user.jpg" : "marker.jpg";
+  };
+
   return (
     <div style={{ height: "100%", borderRadius: "15px" }}>
       <div
@@ -92,9 +104,29 @@ const App: React.FC = () => {
                 lat: location.latitude,
                 lng: location.longitude,
               }}
-              title={`Vehicle Name: ${location.vehicleName}, Staff ID: ${location.operationStaffId}`}
+              icon={{
+                url: getMarkerIcon(location.vehicleType), // Dynamic marker icon
+                scaledSize: new google.maps.Size(30, 30), // Adjust marker size
+              }}
+              onClick={() => setSelectedLocation(location)} // Set selected location for InfoWindow
             />
           ))}
+
+          {/* InfoWindow for selected marker */}
+          {selectedLocation && (
+            <InfoWindow
+              position={{
+                lat: selectedLocation.latitude,
+                lng: selectedLocation.longitude,
+              }}
+              onCloseClick={() => setSelectedLocation(null)} // Close InfoWindow
+            >
+              <div>
+                <p><strong>Vehicle Name:</strong> {selectedLocation.vehicleName}</p>
+                <p><strong>Staff ID:</strong> {selectedLocation.operationStaffId}</p>
+              </div>
+            </InfoWindow>
+          )}
         </GoogleMap>
       </LoadScript>
 
@@ -114,7 +146,10 @@ const App: React.FC = () => {
             color: "white",
             borderRadius: "10px",
           }}
-          onClick={fetchCoordinates}
+          onClick={(e) => {
+            e.preventDefault(); // Prevent default form submission behavior
+            fetchCoordinates(); // Refresh data
+          }}
         >
           Refresh Here
         </button>
