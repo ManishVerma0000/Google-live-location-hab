@@ -13,6 +13,7 @@ interface Location {
   vehicleId: number;
   vehicleName: string;
   operationStaffId: number;
+  staffName:string;
 }
 
 interface ApiResponse {
@@ -122,8 +123,8 @@ const App: React.FC = () => {
               onCloseClick={() => setSelectedLocation(null)} // Close InfoWindow
             >
               <div>
-                <p><strong>Vehicle Name:</strong> {selectedLocation.vehicleName}</p>
-                <p><strong>Staff ID:</strong> {selectedLocation.operationStaffId}</p>
+                <p><strong>Vehicle Name:</strong> {selectedLocation?.vehicleName}</p>
+                <p><strong>Staff Name:</strong> {selectedLocation?.staffName}</p>
               </div>
             </InfoWindow>
           )}
