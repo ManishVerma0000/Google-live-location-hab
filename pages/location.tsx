@@ -1,7 +1,12 @@
 "use client";
 import { useRouter } from "next/router";
 import React, { useState, useEffect } from "react";
-import { GoogleMap, LoadScript, Marker, InfoWindow } from "@react-google-maps/api";
+import {
+  GoogleMap,
+  LoadScript,
+  Marker,
+  InfoWindow,
+} from "@react-google-maps/api";
 import api from "@/api/api";
 
 const API_KEY = process.env.NEXT_PUBLIC_API_KEY as string;
@@ -13,7 +18,7 @@ interface Location {
   vehicleId: number;
   vehicleName: string;
   operationStaffId: number;
-  staffName:string;
+  staffName: string;
 }
 
 interface ApiResponse {
@@ -29,7 +34,9 @@ const App: React.FC = () => {
     lng: 145.77835451688978,
   });
   const [locations, setLocations] = useState<Location[]>([]); // State for locations
-  const [selectedLocation, setSelectedLocation] = useState<Location | null>(null); // For InfoWindow
+  const [selectedLocation, setSelectedLocation] = useState<Location | null>(
+    null
+  ); // For InfoWindow
   const mapContainerStyle = {
     width: "100%",
     height: "500px",
@@ -44,7 +51,7 @@ const App: React.FC = () => {
 
   useEffect(() => {
     if (date && ownerId && routeType) {
-      fetchCoordinates(); // Fetch data only when all parameters are available
+      fetchCoordinates();
     }
   }, [date, ownerId, routeType]);
 
@@ -75,7 +82,7 @@ const App: React.FC = () => {
 
   const getMarkerIcon = (vehicleType: string) => {
     // Choose marker icon based on vehicleType
-    return vehicleType === "bus" ? "user.jpg" : "marker.jpg";
+    return vehicleType === "bus" ? "bus1.png" : "balloons.png";
   };
 
   return (
@@ -123,8 +130,12 @@ const App: React.FC = () => {
               onCloseClick={() => setSelectedLocation(null)} // Close InfoWindow
             >
               <div>
-                <p><strong>Vehicle Name:</strong> {selectedLocation?.vehicleName}</p>
-                <p><strong>Staff Name:</strong> {selectedLocation?.staffName}</p>
+                <p>
+                  <strong>Vehicle Name:</strong> {selectedLocation?.vehicleName}
+                </p>
+                <p>
+                  <strong>Staff Name:</strong> {selectedLocation?.staffName}
+                </p>
               </div>
             </InfoWindow>
           )}
